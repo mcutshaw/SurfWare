@@ -14,16 +14,19 @@ class tris3:
         self.x = [0, 10, 5, 5]
         self.y = [0, 0, 10, 5]
         self.z = [0, 0, 0, 10]
+        self.last = [5, 5, 10]
         #return ax1, x, y, z
     def midpoint(self):
-        a = random.randint(0,len(self.x)-1) #select first starting point
         for i in range(1000):
-            b = random.randint(0, len(self.x)-1) #select other starting point #TODO: make sure they are not the same point
-            logging.warning(f"a is {a} and b is {b} ")
-            self.x.append((self.x[a] + self.x[b]) / 2)
-            self.y.append((self.y[a] + self.y[b]) / 2)
-            self.z.append((self.z[a] + self.z[b]) / 2)
-            a = b
+            v_num = random.randint(0, 3) #select other starting point #TODO: make sure they are not the same point
+            x = self.x[v_num]
+            y = self.y[v_num]
+            z = self.z[v_num]
+            #logging.warning(f"a is {a} and b is {b} ")
+            self.x.append((x + self.last[0]) / 2)
+            self.y.append((y + self.last[1]) / 2)
+            self.z.append((z + self.last[2]) / 2)
+            self.last = [self.x[-1], self.y[-1], self.z[-1]]
 
     def display(self):
         self.ax1.scatter(self.x, self.y, self.z, c = 'm', marker = 'o')
